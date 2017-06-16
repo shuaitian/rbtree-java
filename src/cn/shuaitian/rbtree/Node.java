@@ -1,32 +1,51 @@
 package cn.shuaitian.rbtree;
 /**
  * RBTree Node
- * @author tishuai
- *
- * @param <T>
+ * @author shuaitian
+ * @param <Key,Value> Key为排序键值，Value为存储值
  */
-public class Node<T> {
-	private Node<T> left;
-	private Node<T> right;
-	private Node<T> parent;
+public class Node<Key extends Comparable<Key>,Value> {
+	public static final boolean RED = true;
+	public static final boolean BLACK = false;
+	private Node<Key,Value> left;
+	private Node<Key,Value> right;
+	private Node<Key,Value> parent;
 	private boolean color;	//true for red and false for black
-	private T value;
-	public Node<T> getLeft() {
+	private Key key;
+	private Value value;
+	public Node(Key key,Value value,boolean color){
+		this(key,value,color,null);
+	}
+	
+	public Node(Key key,Value value,boolean color,Node<Key,Value> parent){
+		this.key = key;
+		this.value = value;
+		this.color = color;
+		this.parent = parent;
+	}
+	
+	public void setKey(Key key){
+		this.key = key;
+	}
+	public Key getKey(){
+		return this.key;
+	}
+	public Node<Key,Value> getLeft() {
 		return left;
 	}
-	public void setLeft(Node<T> left) {
+	public void setLeft(Node<Key,Value> left) {
 		this.left = left;
 	}
-	public Node<T> getRight() {
+	public Node<Key,Value> getRight() {
 		return right;
 	}
-	public void setRight(Node<T> right) {
+	public void setRight(Node<Key,Value> right) {
 		this.right = right;
 	}
-	public Node<T> getParent() {
+	public Node<Key,Value> getParent() {
 		return parent;
 	}
-	public void setParent(Node<T> parent) {
+	public void setParent(Node<Key,Value> parent) {
 		this.parent = parent;
 	}
 	public boolean isColor() {
@@ -35,10 +54,10 @@ public class Node<T> {
 	public void setColor(boolean color) {
 		this.color = color;
 	}
-	public T getValue() {
+	public Value getValue() {
 		return value;
 	}
-	public void setValue(T value) {
+	public void setValue(Value value) {
 		this.value = value;
 	}
 	public boolean isRed(){
@@ -52,6 +71,9 @@ public class Node<T> {
 	}
 	public void setBlack(){
 		this.color = false;
+	}
+	public boolean getColor() {
+		return this.color;
 	}
 	
 }
